@@ -1,0 +1,52 @@
+<%-include('../includes/header'); %>
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>Edit Blog</h3>
+			<form method="post" enctype="multipart/form-data">
+				<div class="mb-3 mt-3">
+					<label>Category</label>
+					<select class="form-control" name="category_id">
+						<option value="">Select Category</option>
+						<% categories.forEach(function(cat){ %>
+							<option value="<%-cat.id%>" <% if(cat.id==blog.category_id){ %> selected <% } %> ><%-cat.category_name;%></option>
+						<% }) %>
+						
+					</select>
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Title</label>
+					<input type="text" class="form-control" value="<%-blog.title;%>" placeholder="Title" name="title">
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Short Description</label>
+					<input type="text" class="form-control" value="<%-blog.short_desc;%>" placeholder="Short Description" name="short_desc">
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Description</label>
+					<textarea type="text" class="form-control" rows="8" placeholder="Description" id="description" name="description"><%-blog.description;%></textarea>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 mb-3 mt-3">
+						<label>Image</label>
+						<input type="hidden" value="<%-blog.imagepath%>" name="old_file" />
+						<input type="file" class="form-control" name="imagepath">
+					</div>
+					<div class="col-sm-6 mb-3 mt-3">
+						<img src="<%-process.env.BASE_URL%>/uploads/blogs/<%-blog.imagepath%>" width="300">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Update</button>
+			</form>
+		</div>
+	</div>
+<%-include('../includes/footer'); %>
+<script>
+	ClassicEditor
+		.create( document.querySelector( '#description' ) )
+		.catch( error => {
+			console.error( error );
+		} );
+</script>

@@ -1,0 +1,67 @@
+<%-include('../includes/header'); %>
+	
+	<div class="row d-flex">
+		<div  class="col-sm-6">
+			<h3>Blog List</h3>
+		</div>
+		<div  class="col-sm-6">
+			<a href="<%-process.env.BASE_URL%>/blog/add" class="btn btn-primary btn-sm float-end">Add New</a>
+		</div>
+	</div>
+
+	<div class="row">
+		
+		<div class="col-sm-12">
+			<% if (msg!="") { %>
+				<div class="alert alert-success alert-dismissible">
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+					<strong>Success!</strong> <%-msg;%>
+				</div>
+				
+			<% } %>
+			<table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>#SN</th>
+					<th>Image</th>
+					<th>Title</th>
+					<th>Category</th>
+					<th>Status</th>
+					<th>Action</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<% 
+					sn=1;
+					blogs.forEach(function(blog){ %>
+					  <tr>
+						<td><%-sn++;%></td>
+						<td><img class="card-img-top" src="<%-process.env.BASE_URL%>/uploads/blogs/<%-blog.imagepath;%>"  style="height:30px;width:50px" alt="post image"></td>
+						<td><%-blog.title;%></td>
+						<td><%-blog.category_name;%></td>
+						<td>
+							<% if(blog.publish==1){ %>
+								<a href="<%-process.env.BASE_URL%>/blog/unpublish/<%-blog.id%>" onclick="return confirm('Are you sure to Unpublish?')"><i class="fa fa-check" style="font-size:20px;color:green"></i></a>
+							<% }else{ %>
+								<a href="<%-process.env.BASE_URL%>/blog/publish/<%-blog.id%>" onclick="return confirm('Are you sure to Publish?')"><i class="fa fa-close" style="font-size:20px;color:red"></i></a>
+							<% } %>
+						</td>
+						<td>
+							<a href="<%-process.env.BASE_URL%>/blog/show/<%-blog.id%>" class="btn btn-primary btn-sm">
+								<i class="fa fa-eye"></i>
+							</a>
+							<a href="<%-process.env.BASE_URL%>/blog/edit/<%-blog.id%>" class="btn btn-success btn-sm">
+								<i class="fa fa-pencil-square-o"></i>
+							</a>
+							<a href="<%-process.env.BASE_URL%>/blog/delete/<%-blog.id%>" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger btn-sm">
+								<i class="fa fa-trash-o"></i>
+							</a>
+							
+						</td>
+					  </tr>
+					<% }); %>
+				</tbody>
+			  </table>
+		</div>
+	</div>
+<%-include('../includes/footer'); %>

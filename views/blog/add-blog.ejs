@@ -1,0 +1,86 @@
+<%-include('../includes/header'); %>
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>Add Blog</h3>
+			<form method="post" enctype="multipart/form-data">
+				<div class="mb-3 mt-3">
+					<label>Category</label>
+					<select class="form-control" name="category_id">
+						<option value="">Select Category</option>
+						<% categories.forEach(function(cat){ %>
+							<option value="<%-cat.id%>" ><%-cat.category_name;%></option>
+						<% }) %>
+					</select>
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Title</label>
+					<input type="text" class="form-control" placeholder="Title" name="title">
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Short Description</label>
+					<input type="text" class="form-control" placeholder="Short Description" name="short_desc">
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Description</label>
+					<textarea type="text" class="form-control" placeholder="Description" id="description" name="description"></textarea>
+				</div>
+				<div class="mb-3 mt-3">
+					<label>Image</label>
+					<input type="file" class="form-control" name="imagepath">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+<%-include('../includes/footer'); %>
+<script>
+/*
+	ClassicEditor
+		.create( document.querySelector( '#description' ) )
+		.catch( error => {
+			console.error( error );
+		} );
+		*/
+</script>
+
+<script>
+
+
+ClassicEditor
+    .create( document.querySelector( '#description' ), {
+        toolbar: {
+            items: [
+                'undo', 'redo',
+                '|', 'heading',
+                '|', 'bold', 'italic',
+                '|', 'link', 'insertImage', 'insertTable', 'mediaEmbed', 'blockQuote',
+                '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
+            ]
+        },
+        
+		codeBlock: {
+            languages: [
+                // Do not render the CSS class for the plain text code blocks.
+                { language: 'plaintext', label: 'Plain text', class: '' },
+
+                // Use the "php-code" class for PHP code blocks.
+                { language: 'php', label: 'PHP', class: 'php-code' },
+
+                // Use the "js" class for JavaScript code blocks.
+                // Note that only the first ("js") class will determine the language of the block when loading data.
+                { language: 'javascript', label: 'JavaScript', class: 'js javascript js-code' },
+
+            ]
+        }
+		
+    } )
+    .then( editor => {
+        window.editor = editor;
+    } )
+    .catch( err => {
+        console.error( err );
+    } );
+
+
+</script>

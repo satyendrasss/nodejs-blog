@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="<%-process.env.BASE_URL%>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <script src="<%-process.env.BASE_URL%>/assets/js/bootstrap.bundle.min.js"></script>
+  <link href="<%-process.env.BASE_URL%>/assets/css/style.css" rel="stylesheet">
+</head>
+<body class="" style="background-color:<%-color;%>">
+	<%-include('menu')%>
+	
+	<div>
+		<div class="col-sm-12">
+			<!-- Carousel -->
+			<div id="demo" class="carousel slide" data-bs-ride="carousel">
+			  <!-- Indicators/dots -->
+			  <div class="carousel-indicators">
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+			  </div>
+			  
+			  <!-- The slideshow/carousel -->
+			  <div class="carousel-inner">
+				<div class="carousel-item active">
+				  <img src="<%-process.env.BASE_URL%>/uploads/slider/image-1.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+				  <div class="carousel-caption">
+					<h3>Satyendra</h3>
+					<p>We had such a great time in LA!</p>
+				  </div>
+				</div>
+				<div class="carousel-item">
+				  <img src="<%-process.env.BASE_URL%>/uploads/slider/image-13.jpg" alt="Chicago" class="d-block" style="width:100%">
+				  <div class="carousel-caption">
+					<h3>Chicago</h3>
+					<p>Thank you, Chicago!</p>
+				  </div> 
+				</div>
+				<div class="carousel-item">
+				  <img src="<%-process.env.BASE_URL%>/uploads/slider/image-27.jpg" alt="New York" class="d-block" style="width:100%">
+				  <div class="carousel-caption">
+					<h3>New York</h3>
+					<p>We love the Big Apple!</p>
+				  </div>  
+				</div>
+			  </div>
+			  
+			  <!-- Left and right controls/icons -->
+			  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			  </button>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="min-height:490px;">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Latest Post</h3>
+				<p>This example adds a dropdown menu in the navbar.</p>
+			</div>
+			
+			<% posts.forEach(function(post){ %>
+				<div class="col-sm-3">
+					<div class="card">
+						<div class="card-body">
+							<img class="card-img-top post-card-img" src="<%-process.env.BASE_URL%>/uploads/blogs/<%-post.imagepath;%>" alt="Card image">
+							<h5 class="card-title"><%-post.title;%></h5>
+							<p class="card-text short-desc"><%-post.short_desc;%></p>
+							<a href="<%-process.env.BASE_URL%>/post/<%-post.slug;%>" class="card-link">Read More</a>
+						</div>
+					</div>
+				</div>
+			<% }) %>
+			
+			<div class="col-sm-12 text-center p-3">
+				<a href="<%-process.env.BASE_URL%>/post" class="btn btn-primary">View All</a>
+			</div>
+			
+		</div>
+	</div>
+	
+	<footer class="mt-2">
+		<nav class="navbar navbar-expand-sm border bg-light justify-content-center">
+		  <ul class="navbar-nav">
+			<li class="nav-item">
+			  <a class="nav-link" href="#">Satyendra Singh</a>
+			</li>
+		  </ul>
+		</nav>
+	</footer>
+	<script src="<%-process.env.BASE_URL%>/assets/js/jquery.min.js"></script>
+
+</body>
+</html>

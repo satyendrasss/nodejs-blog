@@ -1,0 +1,33 @@
+<%-include('../includes/header'); %>
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>User List</h3>
+			
+			 <table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Action</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<% users.forEach(function(user){ %>
+					  <tr>
+						<td><%-user.name;%></td>
+						<td><%-user.email;%></td>
+						<td>
+							<a href="<%-process.env.BASE_URL%>/users/show/<%-user.id%>" class="btn btn-primary btn-sm">
+								<i class="fa fa-eye"></i>
+							</a>
+							<a href="<%-process.env.BASE_URL%>/users/delete/<%-user.id%>" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger btn-sm">
+								<i class="fa fa-trash-o"></i>
+							</a>
+						</td>
+					  </tr>
+					<% }); %>
+				</tbody>
+			  </table>
+		</div>
+	</div>
+<%-include('../includes/footer'); %>

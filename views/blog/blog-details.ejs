@@ -1,0 +1,18 @@
+<%-include('../includes/header'); %>
+	<div class="row">
+		<div class="col-sm-8">
+			<h3>Blog Details</h3>
+			<h4><%-blogdetails.title%></h4>
+				
+				<% if(blogdetails.imagepath!=""){ %>
+					<img src="<%-process.env.BASE_URL%>/uploads/blogs/<%-blogdetails.imagepath%>" width="100%" />
+				<% }else{ %>
+					
+					<img src="https://placehold.jp/450x150.png" width="100%" />
+				<% } %>
+			<br>
+			<strong><%-blogdetails.short_desc%></strong>
+			<p><%-blogdetails.description;%></p>
+		</div>
+	</div>
+<%-include('../includes/footer'); %>
